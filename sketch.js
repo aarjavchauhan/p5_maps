@@ -21,6 +21,7 @@ let capitalArray = [];
 
 function preload() {
   data = loadJSON('country_capitals.json')
+  fullData = loadJSON('data.json')
 }
 
 function setup() {
@@ -66,4 +67,8 @@ function mapCapitals(){
       capitalArray.push([position.x, position.y]);
     }
   }
+}
+
+function mapData(){
+  console.log('test')
 }
