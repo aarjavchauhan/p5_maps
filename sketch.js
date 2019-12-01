@@ -17,7 +17,7 @@ let canvas;
 
 //array storing pixel locations of viewable capitals
 let capitalArray = [];
-
+let countriesDisplayed = []
 
 function preload() {
   data = loadJSON('country_capitals.json')
@@ -45,7 +45,9 @@ function drawCircles(){
   for (var i = 0; i < capitalArray.length; i++) {
     var latitude = capitalArray[i][0];
     var longitude = capitalArray[i][1];
-    var radius = 10 + 10 * sin(frameCount / 50);
+    //console.log(capitalArray[i]);
+    var radius = capitalArray[i][2]/100;
+  //  console.log(capitalArray[i][0][2]);
     circle(latitude, longitude, radius)
   }
   pop()
@@ -62,13 +64,16 @@ function mapCapitals(){
   for (var i = 0; i < 240; i++) {
     const latitude = Number(data[i].CapitalLatitude);
     const longitude = Number(data[i].CapitalLongitude);
+
+    var d1980 = 0
+    if(data[i].hasOwnProperty("1980")){
+      d1980 = parseFloat(trim(data[i]["1980"]).replace(/,/g, ''))
+      console.log(true);
+    }
+
     if (myMap.map.getBounds().contains([latitude, longitude])) {
       const position = myMap.latLngToPixel(latitude, longitude);
-      capitalArray.push([position.x, position.y]);
+      capitalArray.push([position.x, position.y, d1980]);
     }
   }
-}
-
-function mapData(){
-  console.log('test')
 }
