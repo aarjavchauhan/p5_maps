@@ -39,15 +39,21 @@ function draw() {
 }
 
 function drawCircles(){
+
+  let yearMap = Math.ceil(map(mouseX, 0, width, 0, 40))
+  push()
+  fill(0, 0, 0)
+  textSize(32)
+  text(1980+yearMap, mouseX, mouseY-10)
+  pop()
   push()
   noStroke()
-  fill(125, 125, 125)
   for (var i = 0; i < capitalArray.length; i++) {
     var latitude = capitalArray[i][0];
     var longitude = capitalArray[i][1];
-    //console.log(capitalArray[i]);
-    var radius = capitalArray[i][2]/100;
-  //  console.log(capitalArray[i][0][2]);
+    var radius = capitalArray[i][2][yearMap]/500;
+
+    fill(125, 125, 125, 100)
     circle(latitude, longitude, radius)
   }
   pop()
@@ -66,14 +72,20 @@ function mapCapitals(){
     const longitude = Number(data[i].CapitalLongitude);
 
     var d1980 = 0
-    if(data[i].hasOwnProperty("1980")){
-      d1980 = parseFloat(trim(data[i]["1980"]).replace(/,/g, ''))
-      console.log(true);
+    var yearArray = []
+
+    for (var j = 1980; j <= 2019; j++) {
+      if(data[i].hasOwnProperty(""+j+"")){
+        yearArray.push(parseFloat(trim(data[i][""+j+""]).replace(/,/g, '')))
+      }
+      else {
+        yearArray.push(0)
+      }
     }
 
     if (myMap.map.getBounds().contains([latitude, longitude])) {
       const position = myMap.latLngToPixel(latitude, longitude);
-      capitalArray.push([position.x, position.y, d1980]);
+      capitalArray.push([position.x, position.y, yearArray]);
     }
   }
 }
