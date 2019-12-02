@@ -73,8 +73,6 @@ function drawCircles(){
 
     let displayColor = lerpColor(lowColor, highColor, mapColor)
 
-    console.log(displayColor);
-
     fill(displayColor)
     circle(latitude, longitude, radius)
   }
