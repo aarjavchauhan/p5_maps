@@ -41,6 +41,10 @@ function draw() {
 function drawCircles(){
 
   let yearMap = Math.ceil(map(mouseX, 0, width, 0, 40))
+  if(yearMap > 39)
+  {
+    yearMap = 39
+  }
   push()
   fill(0, 0, 0)
   textAlign(CENTER)
@@ -59,7 +63,19 @@ function drawCircles(){
     var longitude = capitalArray[i][1];
     var radius = capitalArray[i][2][yearMap]/500;
 
-    fill(125, 125, 125, 100)
+    var lowColor = color(0, 142, 204, 125)
+    var highColor = color(194,24,7, 125)
+
+    var lowValue = 2000
+    var highValue = 82000
+
+    let mapColor = map(capitalArray[i][2][yearMap], lowValue, highValue, 0, 1)
+
+    let displayColor = lerpColor(lowColor, highColor, mapColor)
+
+    console.log(displayColor);
+
+    fill(displayColor)
     circle(latitude, longitude, radius)
   }
   pop()
