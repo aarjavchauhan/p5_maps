@@ -66,7 +66,7 @@ function drawCircles(){
     var lowColor = color(0, 142, 204, 125)
     var highColor = color(194,24,7, 125)
 
-    var lowValue = 2000
+    var lowValue = 0
     var highValue = 82000
 
     let mapColor = map(capitalArray[i][2][yearMap], lowValue, highValue, 0, 1)
