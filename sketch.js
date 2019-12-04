@@ -61,7 +61,7 @@ function drawCircles(){
   for (var i = 0; i < capitalArray.length; i++) {
     var latitude = capitalArray[i][0];
     var longitude = capitalArray[i][1];
-    var radius = capitalArray[i][2][yearMap]/500;
+    var radius = map(capitalArray[i][2][yearMap], 1, 82000, 10, 300)
 
     var lowColor = color(0, 142, 204, 125)
     var highColor = color(194,24,7, 125)
@@ -73,8 +73,15 @@ function drawCircles(){
 
     let displayColor = lerpColor(lowColor, highColor, mapColor)
 
-    fill(displayColor)
-    circle(latitude, longitude, radius)
+    if(capitalArray[i][2][yearMap] != 0)
+    {
+      fill(displayColor)
+      circle(latitude, longitude, radius)
+    }
+    else {
+      fill(128, 128, 128)
+      circle(latitude, longitude, 2.5)
+    }
   }
   pop()
 }
