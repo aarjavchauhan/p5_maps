@@ -25,7 +25,7 @@ function preload() {
 }
 
 function setup() {
-  canvas = createCanvas(700, 700);
+  canvas = createCanvas(windowWidth, windowHeight);
 
   // Create a tile map and overlay the canvas on top.
   myMap = mappa.tileMap(options);
