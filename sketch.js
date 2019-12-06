@@ -5,7 +5,7 @@ const key = 'pk.eyJ1IjoiYWFyamF2YyIsImEiOiJjazBwbGkzd2swNnRvM2xxbGUyd3J5d3p3In0.
 const options = {
   lat: 28.6,
   lng: 77.200000,
-  zoom: 6,
+  zoom: 3,
   studio: true,
   style: 'mapbox://styles/aarjavc/ck3eqwmky34511cmlx997i4rg',
 };
@@ -45,11 +45,12 @@ function drawCircles(){
   {
     yearMap = 39
   }
+  let year = 1980 + yearMap
   push()
   fill(0, 0, 0)
   textAlign(CENTER)
   textSize(32)
-  text(1980+yearMap, mouseX, mouseY-10)
+  text(year, mouseX, mouseY-10)
   pop()
 
   drawText()
@@ -59,9 +60,9 @@ function drawCircles(){
   push()
   noStroke()
   for (var i = 0; i < capitalArray.length; i++) {
-    var latitude = capitalArray[i][0];
-    var longitude = capitalArray[i][1];
-    var radius = map(capitalArray[i][2][yearMap], 1, 82000, 10, 300)
+    var latitude = capitalArray[i][0]
+    var longitude = capitalArray[i][1]
+    var radius = map(capitalArray[i][2][yearMap], 1, 82000, 10, 200)
 
     var lowColor = color(0, 142, 204, 125)
     var highColor = color(194,24,7, 125)
@@ -73,6 +74,11 @@ function drawCircles(){
 
     let displayColor = lerpColor(lowColor, highColor, mapColor)
 
+    //display countries
+    // for (var i = 0; i < array.length; i++) {
+    //
+    // }
+    //
     if(capitalArray[i][2][yearMap] != 0)
     {
       fill(displayColor)
@@ -98,6 +104,8 @@ function mapCapitals(){
     const latitude = Number(data[i].CapitalLatitude);
     const longitude = Number(data[i].CapitalLongitude);
 
+    const countryName = data[i].CountryName
+
     var yearArray = []
 
     for (var j = 1980; j <= 2019; j++) {
@@ -111,7 +119,8 @@ function mapCapitals(){
 
     if (myMap.map.getBounds().contains([latitude, longitude])) {
       const position = myMap.latLngToPixel(latitude, longitude);
-      capitalArray.push([position.x, position.y, yearArray]);
+
+      capitalArray.push([position.x, position.y, yearArray, countryName]);
     }
   }
 }
