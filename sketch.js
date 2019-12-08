@@ -59,7 +59,14 @@ function drawCircles(){
 
   push()
   noStroke()
+  var highestInflow = 1000
+
   for (var i = 0; i < capitalArray.length; i++) {
+    if(capitalArray[i][2][yearMap]>highestInflow){
+      highestInflow = capitalArray[i][2][yearMap]
+    }
+
+
     var latitude = capitalArray[i][0]
     var longitude = capitalArray[i][1]
     var radius = map(capitalArray[i][2][yearMap], 1, 82000, 10, 200)
@@ -68,7 +75,7 @@ function drawCircles(){
     var highColor = color(194,24,7, 125)
 
     var lowValue = 0
-    var highValue = 82000
+    var highValue = highestInflow
 
     let mapColor = map(capitalArray[i][2][yearMap], lowValue, highValue, 0, 1)
 
