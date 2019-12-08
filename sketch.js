@@ -3,9 +3,9 @@ const key = 'pk.eyJ1IjoiYWFyamF2YyIsImEiOiJjazBwbGkzd2swNnRvM2xxbGUyd3J5d3p3In0.
 
 //map options created online on mapbox
 const options = {
-  lat: 28.6,
-  lng: 77.200000,
-  zoom: 3,
+  lat: 0,
+  lng: 0.27,
+  zoom: 2,
   studio: true,
   style: 'mapbox://styles/aarjavc/ck3eqwmky34511cmlx997i4rg',
 };
